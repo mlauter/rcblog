@@ -1,8 +1,8 @@
 title:            Miriam at Hacker School
 description:      Follow along as I learn stuff.
 # Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              https://mlauter.github.io
-# url:                http://localhost:4000
+url:              https://mlauter.github.io/rcblog
+#url:                http://localhost:4000
 disqus_shortname:
 
 # Owner/author information
