@@ -7,4 +7,4 @@ gem 'rake'
 gem 'thor'
 gem 'activesupport'
 gem 'stringex'
-gem 'github-pages', group: :jekyll_plugins
+gem 'github-pages', 193, group: :jekyll_plugins
