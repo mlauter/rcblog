@@ -1,0 +1,794 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>How to Make Your Own Smart AC &#8211; Miriam at Hacker School</title>
+<meta name="description" content="Or, the Internet of Things comes to my room.">
+<meta name="keywords" content="internet, of, things,, home, automation,, DIY,, instructable,, raspberry, pi,, flask">
+<!-- Twitter Cards -->
+	
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:image" content=
+			
+				
+						"https://mlauter.github.io/images/"
+				
+			
+		>
+	
+	<meta name="twitter:title" content="How to Make Your Own Smart AC">
+	<meta name="twitter:description" content="Or, the Internet of Things comes to my room.">
+	<meta name="twitter:creator" content="@miriamlauter">
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Make Your Own Smart AC">
+<meta property="og:description" content="Or, the Internet of Things comes to my room.">
+<meta property="og:url" content="https://mlauter.github.io/how-to-make-your-own-smart-ac/">
+<meta property="og:site_name" content="Miriam at Hacker School">
+
+
+
+
+
+<link rel="canonical" href="https://mlauter.github.io/how-to-make-your-own-smart-ac/">
+<link href="https://mlauter.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Miriam at Hacker School Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://mlauter.github.io/assets/css/main.min.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://mlauter.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://mlauter.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://mlauter.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://mlauter.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://mlauter.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://mlauter.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://mlauter.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://mlauter.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://mlauter.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://mlauter.github.io">Miriam at Hacker School</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				<li><a href="https://mlauter.github.io/posts/" >Posts</a></li>
+		        
+				<li><a href="https://mlauter.github.io/about/" >About</a></li>
+		        
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+	<img src="https://mlauter.github.io/images/miriam_bio-photo.jpg" class="bio-photo" alt="Miriam Lauter bio photo"></a>
+
+<h3>Miriam Lauter</h3>
+<p>I'm a person learning stuff.</p>
+<a href="http://github.com/mlauter" class="author-social" target="_blank"><i class="fa fa-github"></i> Github</a>
+<a href="http://twitter.com/miriamlauter" class="author-social" target="_blank"><i class="fa fa-twitter-square"></i> Twitter</a>
+
+
+<a href="http://linkedin.com/in/miriamlauter" class="author-social" target="_blank"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
+
+
+
+
+
+
+
+
+  </div>
+  <article>
+    <div class="headline-wrap">
+      
+        <h1><a href="https://mlauter.github.io/how-to-make-your-own-smart-ac/" rel="bookmark" title="How to Make Your Own Smart AC">How to Make Your Own Smart AC</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p><img align="right" src="http://techli.com/wp-content/uploads/2011/10/415.jpeg" />
+Remember that late-90s Disney Channel Original Movie <a href="http://en.wikipedia.org/wiki/Smart_House_(film)"><em>Smart House</em></a> in which a young, motherless, computer-genius boy wins a fully automated robot-house, only to have the house-software come alive as an overbearing 50s-esque mother who locks the boy and his family indoors ‘for their own good’? </p>
+<p><br /></p>
+<p>…maybe you don’t remember. But <em>I</em> do, and I have always wanted to build that. Except without the sexist/robot-takeover part (jeez Disney, what is your deal with mothers?).</p>
+
+<p><br /></p>
+<!-- <p><br /></p>  -->
+
+<p>Well, I didn’t quite do that. But, I did build a pretty neat device and web app for controlling my air conditioner. 
+<!-- <p><br /></p> -->
+<!-- how to phrase?? --></p>
+
+<h1 id="heres-a-step-by-step-guide-to-what-i-did">Here’s a step-by-step guide to what I did.</h1>
+<p><em>Note, before starting this project, I’d never used a raspberry pi (I’d done just a tiny bit of Arduino), I’d never written a server, and I’d never made a web app of any kind. So, if you’re coming to this with just a bit of programming experience, take heart! This is a totally doable project.</em></p>
+
+<h2 id="parts-and-tools">Parts and Tools</h2>
+
+<p><img src="../images/ac_project_toolkit.jpg" alt="toolkit" /></p>
+
+<h3 id="components-of-the-finished-project">Components of the finished project</h3>
+<ol>
+  <li>Raspberry Pi (I used <a href="https://www.adafruit.com/products/1914">this</a> one)</li>
+  <li><a href="https://www.adafruit.com/products/268">Power Switch (or just a relay)</a></li>
+  <li><a href="https://www.adafruit.com/products/814">USB wifi for raspberry pi</a></li>
+  <li><a href="https://www.adafruit.com/products/102">A micro SD card</a> (if you are using RPi B+, otherwise check your specs)</li>
+  <li><a href="https://www.adafruit.com/products/381">Digital temperature sensor</a></li>
+  <li><a href="https://www.adafruit.com/products/592">Micro USB charger for the raspberry pi</a> + <a href="https://www.adafruit.com/products/501">wall adapter</a></li>
+  <li>4.7K resistor</li>
+  <li>Jumper wires, both <a href="http://www.ebay.com/itm/40-Pin-20cm-Dupont-Wire-Connector-Cable-2-54mm-Male-to-Male-1P-1P-For-Arduino-/221455439425?ssPageName=ADME:X:RTQ:US:1123">male</a> and <a href="http://www.ebay.com/itm/Dupont-Wire-20cm-Cable-Line-Color-40P-40P-Test-Lines-Connector-/221402540531">female</a>
+  <em>Tip! this ebay seller is reliable and cheap</em></li>
+  <li><a href="http://www.ebay.com/itm/10pcs-DIY-Prototype-Paper-PCB-Universal-Experiment-Matrix-Circuit-Board-5-x-7cm-/221542018120]">Prototype Paper PCB </a> (DIY circuit board)</li>
+  <li>Your computer</li>
+</ol>
+
+<h3 id="tools">Tools</h3>
+<ol>
+  <li>Soldering iron and solder</li>
+  <li>A very very skinny phillips head screwdriver</li>
+  <li>A hot glue gun</li>
+</ol>
+
+<h3 id="for-testingsetup-only">For testing/setup only</h3>
+<ol>
+  <li>A <a href="https://www.adafruit.com/products/64">breadboard</a></li>
+  <li>An <a href="https://www.sparkfun.com/products/9590">LED</a></li>
+  <li>A monitor, keyboard, and ethernet cable (for setting up the pi)</li>
+</ol>
+
+<h2 id="set-up-the-pi">Set up the Pi</h2>
+<p>I cannot stress this strongly enough: <strong><a href="https://learn.adafruit.com/">Adafruit</a> tutorials for allll the things!</strong> Their tutorials are super informative and easy to follow. Plus they also sell all the parts. It’s a one stop super shop for all things hardware.</p>
+
+<p>If you already have a Raspberry Pi set up, or you feel comfortable getting started by going directly to Adafruit, downloading an OS image to your SD card, configuring, setting up wifi, etc, just continue with this post.</p>
+
+<p>If you want some more help getting started, check out my <a href="../getting-started-with-raspberry-pi">companion blog post</a> on getting your Raspberry Pi set up as a first-time user.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p><img src="../images/acproject_schematic.jpg" alt="diagram" /></p>
+
+<p><em>If you don’t want to read this whole post and just want to see the code I used, check out <a href="https://github.com/mlauter/RemoteAC">my github repo</a>. <code>ac_ping.py</code> contains the code running on the Pi, while the app folder contains everthing for the server and UI, including the Procfile for deploying on Heroku. You’ll have to change the URLs, secret key, and username password, I’ve put in place-holders.</em></p>
+
+<h1 id="part-i-the-hardware-building-your-circuit">Part I: The Hardware: building your circuit</h1>
+
+<p>Before I get started with this section of the post, I want to thank <a href="http://polkapolka.net/">Dana Sniezko</a>, a fellow Hacker Schooler and hardware genius, for helping me SO much with this project. Seriously, Dana, if you’re reading this, thank you for letting me bug you with questions for weeks and for teaching me all this awesome stuff. </p>
+
+<h2 id="raspberry-pi----powerswitch-relay----air-conditioner">Raspberry Pi – PowerSwitch (relay) – Air conditioner</h2>
+
+<p>As you can see in the diagram, this is the only part of the entire system that interacts with the air conditioner. Instead of connecting your air conditioner’s power plug directly into the wall socket, you will plug it into the PowerSwitch Tail II, and plug the other end of that into the wall. (Make sure to check your air conditioner’s electrical specifications, because the PowerSwitch can only handle up to 15 amps. Most ACs will draw far less than that, though, mine only draws about 5). </p>
+
+<p>Now the cool part. Inside the black box that is now between your air conditioner and the wall socket there is a relay, which is just an electrically controlled switch. When you send power to the switch from one of your Raspberry Pi’s GPIO (general purpose input/output) pins, the switch will close and power will flow between the wall and the AC. When no power is flowing from the Pi to the switch, the switch will be open, and no power will flow between the wall and the AC. 
+<img src="../images/powerswitch.jpg" alt="powerswitch" />
+Make sure that your AC is always set to be ‘on’, we’re bypassing the air conditioner’s normal on/off control system. </p>
+
+<p>Let’s set that up. Consult the <a href="http://www.raspberry-projects.com/pi/wp-content/uploads/2014/09/rpi_model_b_plus_io_pinouts.jpg">pinout map</a> for your Raspberry Pi. I find it useful to look at one that shows a picture of the Pi, so you can make sure you’re oriented correctly.</p>
+
+<p><img src="../images/rpi_model_b_plus_io_pinouts.jpg" alt="pinoutmap" /></p>
+
+<ol>
+  <li>Make sure your Raspberry Pi is not plugged into power while you are working on this.</li>
+  <li>Choose any pin labeled GPIO except GPIO4 (which we need to reserve for our temperature sensor). 
+  For example, on the map above, pin number 11, the 6th pin down in the left column is GPIO17. </li>
+  <li>Take one of your jumper wires (a red one would be a good choice), and connect it to that pin. </li>
+  <li>Now connect one of the male to male jumper wires to that wire. </li>
+  <li>Find a pin labeled ground (GND) and connect another wire (black or grey would be a good choice), and again connect that to one of the male to male wires.</li>
+  <li>Connect the power (wire from the GPIO pin) to <em>1: +in</em> on the PowerSwitch, and your ground wire to <em>2: -in</em>. Ignore the spot labeled <em>3:Ground</em> on the PowerSwitch. </li>
+  <li>You’ll notice that on the face of the power switch with labels, there are some holes with screws in them. Use a small screw driver to adjust these screws such that your jumper wires are secured in the powerswitch and cannot be tugged out. </li>
+  <li><em>Note: while you are testing, you don’t need the power switch at all, just plug the wires into a breadboard and <a href="https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/">use an LED</a>. If you can turn the light on and off, you can turn your AC on and off.</em></li>
+</ol>
+
+<p><img src="../images/powerswitch_connected.jpg" alt="power switch plugged in" /></p>
+
+<h3 id="rpi-gpio-library">RPi-GPIO library</h3>
+<p><a href="https://learn.adafruit.com/playing-sounds-and-using-buttons-with-raspberry-pi/install-python-module-rpi-dot-gpio">Install RPi-GPIO on your Pi</a></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">RPi.GPIO</span> <span style="color:#080;font-weight:bold">as</span> io
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">time</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>io.setmode(io.BCM)
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>switch_pin = <span style="color:#00D">17</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>io.setup(switch_pin, io.OUT)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#777">#blink 10 times</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#080;font-weight:bold">for</span> i <span style="color:#080;font-weight:bold">in</span> <span style="color:#369;font-weight:bold">range</span>(<span style="color:#00D">10</span>):  
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    io.output(switch_pin, <span style="color:#069">False</span>)   <span style="color:#777"># set output pin LOW (off)</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    time.sleep(<span style="color:#00D">5</span>)   <span style="color:#777"># sleep for 5 seconds</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    io.output(switch_pin, <span style="color:#069">True</span>)    <span style="color:#777"># set out put pin HIGH (on)</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    time.sleep(<span style="color:#00D">5</span>)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>io.cleanup() <span style="color:#777">#reset the pins</span>
+</pre></div>
+</div>
+</div>
+
+<p>We will adapt this blinking light for controlling the relay later on. Note, in order to use GPIO you have to run as root! </p>
+
+<h2 id="digital-temperature-sensor">Digital Temperature sensor</h2>
+
+<p>Checkout <a href="https://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/hardware">this tutorial</a>. The circuit diagram is slightly confusing so here is another I find easier to read:</p>
+
+<p><img src="../images/RasPi_DS18B20.jpg" alt="temp sensor circuit" /></p>
+
+<p>For testing, set this up on the circuit board. You can send power and ground to the bus along the side.</p>
+
+<p><br /></p>
+<p>When you set this up for real: </p>
+
+<ol>
+  <li>Take a sheet of PCB (it doesn’t need to be large, so you can break off a piece if you want)
+1.. Cut off the connecter end of the jumper wires coming from the pi and strip off the covering</li>
+  <li>Put the wire through a hole of the pc.</li>
+  <li>Strip down the leads from the temperature sensor.</li>
+  <li>Solder red to red, yellow to yellow, black to black.</li>
+  <li>Solder your resistor between red and yellow.</li>
+  <li>Use your hot glue gun to put a blob of glue over the blobs of solder. (Not strictly necessary, but a good thing to do).</li>
+  <li>Use something to secure the cord of the temperature sensor to your circuit board (so that you don’t end up putting a lot of strain on individual wires). I used a hairband.</li>
+</ol>
+
+<p>Here are some pictures of my circuit, both top and bottom sides.
+<img src="../images/tempsensorcircuit_frontback.jpg" alt="my temp sensor circuit" /></p>
+
+<h3 id="the-code">The code</h3>
+<p>Continue following the <a href="https://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/ds18b20">adafruit tutorial from above</a> to set up the directory for the temperature sensor for the first time. </p>
+
+<p>Once you’ve done that, here is the code you will use. I copied it directly into my own program. <em>Note: I noticed that for some reason, every time I wanted to restart my program, I had to cd into my device folder first, otherwise I’d get an error saying that the folder didn’t exist.</em></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">os</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">glob</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">time</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span> 
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>os.system(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">modprobe w1-gpio</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>os.system(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">modprobe w1-therm</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span> 
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>base_dir = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/sys/bus/w1/devices/</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>device_folder = glob.glob(base_dir + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">28*</span><span style="color:#710">'</span></span>)[<span style="color:#00D">0</span>]
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>device_file = device_folder + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/w1_slave</span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span> 
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">read_temp_raw</span>():
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    f = <span style="color:#369;font-weight:bold">open</span>(device_file, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">r</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    lines = f.readlines()
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    f.close()
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#080;font-weight:bold">return</span> lines
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span> 
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">read_temp</span>():
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    lines = read_temp_raw()
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span style="color:#080;font-weight:bold">while</span> lines[<span style="color:#00D">0</span>].strip()[-<span style="color:#00D">3</span>:] != <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">YES</span><span style="color:#710">'</span></span>:
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        time.sleep(<span style="color:#60E">0.2</span>)
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        lines = read_temp_raw()
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    equals_pos = lines[<span style="color:#00D">1</span>].find(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">t=</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span style="color:#080;font-weight:bold">if</span> equals_pos != -<span style="color:#00D">1</span>:
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        temp_string = lines[<span style="color:#00D">1</span>][equals_pos+<span style="color:#00D">2</span>:]
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>        temp_c = <span style="color:#369;font-weight:bold">float</span>(temp_string) / <span style="color:#60E">1000.0</span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>        temp_f = temp_c * <span style="color:#60E">9.0</span> / <span style="color:#60E">5.0</span> + <span style="color:#60E">32.0</span>
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>        <span style="color:#080;font-weight:bold">return</span> temp_c, temp_f
+</pre></div>
+</div>
+</div>
+
+<p>That’s it for the hardware side of this project. I’ll return to the full program I have running on the Pi in Part III. </p>
+
+<h1 id="part-ii-the-server">Part II: The Server</h1>
+
+<p>If this is not new to you, write your server however you want, just make sure that your pi can make POST requests to some route that will add information to a database.</p>
+
+<p>If this is new to you, I’ll do a quick overview of my Flask server, and you can check out the code for yourself on <a href="https://github.com/mlauter/RemoteAC/blob/master/app/app.py">github</a>. Note, this will not be a Flask tutorial. If you’ve never used Flask or written a server, I highly recommend <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">Miguel Grinberg’s Flask Mega-Tutorial</a>. Though it is much more information than you need for this project. I also recommend the <a href="https://realpython.com/blog/python/python-web-applications-with-flask-part-i/">realpython tutorial</a> and their <a href="https://github.com/realpython/discover-flask">‘discover flask’</a> video series.</p>
+
+<p>The server I’ve written is intended to be used by just two clients, you, and your Raspberry Pi. It is not intended for a large scale app.</p>
+
+<h2 id="the-three-main-routes">The three main routes</h2>
+
+<p>My server has three main routes, <code>/index</code>, <code>/ac_status</code>, and <code>/switch_state</code>.Here is what they do.</p>
+
+<h3 id="index--the-homepage">/Index : The Homepage</h3>
+<p>This route (which can also be accessed with the bare <code>/</code>), runs the homepage function which returns the homepage, <code>index.html</code>. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#B0B">@app.route</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span>, methods = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">GET</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">POST</span><span style="color:#710">'</span></span>])
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#B0B">@app.route</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/index</span><span style="color:#710">'</span></span>, methods = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">GET</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">POST</span><span style="color:#710">'</span></span>])
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">homepage</span>():
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    current_log = db.get_last_ac_state()
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    room_temp = current_log[<span style="color:#00D">2</span>]
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    is_running = <span style="color:#369;font-weight:bold">bool</span>(current_log[<span style="color:#00D">3</span>])
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#080;font-weight:bold">return</span> render_template(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">index.html</span><span style="color:#710">'</span></span>, room_temp = room_temp, 
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>                            is_running = is_running, 
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>                            time=datetime.datetime.now())
+</pre></div>
+</div>
+</div>
+
+<h3 id="acstatus-the-route-for-the-raspberry-pi">/ac_status: The route for the Raspberry Pi</h3>
+
+<p>This route only accepts POST requests. We will run code on the Pi to POST to this route every second with its most up-to-date state information. </p>
+
+<p>The function called in this route <code>update()</code> will take the info from the Pi, and store it in a sqlite database (using the <code>sqlite3</code> module in python). Check out <code>db.py</code> to see my database functions.</p>
+
+<p>It will then return the information stored in a global variable called <code>desired-state</code> to the Pi. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>AcState = namedtuple(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">AcState</span><span style="color:#710">'</span></span>, 
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>                    [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">timestamp</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">room_temp</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">is_running</span><span style="color:#710">'</span></span>, 
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>                    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>])
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#B0B">@app.route</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/ac_status</span><span style="color:#710">'</span></span>, methods=[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">POST</span><span style="color:#710">'</span></span>])
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">update</span>():
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    response = request.json
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    room_temp = response[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">room_temp</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    is_running = response[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">is_running</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    state_num = response[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>] <span style="color:#777">#1, 2, or 3</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#777">#an empty string or an integer</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    goal_temp = <span style="color:#369;font-weight:bold">str</span>(response[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>]) 
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#080;font-weight:bold">print</span> room_temp
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span style="color:#080;font-weight:bold">print</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">I heard from the AC</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    db.add_ac_state(AcState(datetime.datetime.now(),
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                            room_temp,is_running,
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>                            state_num,goal_temp))
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    <span style="color:#080;font-weight:bold">global</span> desired_state
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    <span style="color:#080;font-weight:bold">return</span> jsonify(desired_state)
+</pre></div>
+</div>
+</div>
+
+<p>I will discuss how I handle the <code>desired-state</code> shortly.</p>
+
+<h3 id="switchstate-the-route-that-the-ui-will-hit">/switch_state: The route that the UI will hit</h3>
+
+<p>This route takes both GET and POST requests, and it calls the function, <code>switch_state</code>. </p>
+
+<p>First, it gets the latest information from the database. If the request is just a GET, the function will simply return the latest information from the database to the browser. If it’s a POST request, however, we’ll first call another function <code>statify</code>, to translate what the user has asked for on the browser end, into something easy to convey to the air conditioner, and we’ll update the global <code>desired_state</code> variable.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#B0B">@app.route</span>(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/switch_state</span><span style="color:#710">'</span></span>, methods=[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">GET</span><span style="color:#710">'</span></span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">POST</span><span style="color:#710">'</span></span>])
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">switch_state</span>():
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    current_log = db.get_last_ac_state()
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    current_state = (current_log[<span style="color:#00D">4</span>], current_log[<span style="color:#00D">5</span>])
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#777">#if we have a post request, do this stuff, </span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#777">#otherwise just populate the page </span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#777">#with the latest database state</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#080;font-weight:bold">if</span> request.method == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">POST</span><span style="color:#710">'</span></span>:
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        <span style="color:#080;font-weight:bold">print</span> request.json
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#080;font-weight:bold">global</span> desired_state
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        desired_state = statify(request.json)
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>        desired_state_tup = (desired_state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>],
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>                             desired_state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>])
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        current_log = db.get_last_ac_state()
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        current_state = (current_log[<span style="color:#00D">4</span>], current_log[<span style="color:#00D">5</span>])
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span style="color:#777">#need to return stuff that the browser will then use</span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span style="color:#080;font-weight:bold">return</span> jsonify(is_running = current_log[<span style="color:#00D">3</span>], 
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>                   state_num=current_state[<span style="color:#00D">0</span>],
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>                   goal_temp=current_state[<span style="color:#00D">1</span>])
+</pre></div>
+</div>
+</div>
+
+<h3 id="representing-the-state-of-the-ac-desiredstate-and-statify">Representing the state of the AC: desired_state and statify</h3>
+
+<p>In order to make the program on the Pi as simple as possible, I’ve decided to represent what I want the air conditioner to be doing in three different states. <strong>1: Completely and totally OFF. 2: Completely and totally ON. 3: Trying to maintain a particular temperature</strong></p>
+
+<p>Because state 3 requires a temperature, I’ve represented all the states as a dictionary of <code>{state number:?, temperature:?}</code>, where the temperature is the empty string if we have state 1 or 2, or an integer (converted to a string) in fahrenheit for state 3. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#777">#initialize desired_state to a dictionary </span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#777">#representing the off state</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>desired_state={<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>:<span style="color:#00D">1</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>}
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">statify</span>(ui_state):
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#777">#takes in inputs from the browser and returns </span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#777">#an allowable state to give the AC as a dictionary. </span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    allowed_states = {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">OFF</span><span style="color:#710">'</span></span>:{<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>:<span style="color:#00D">1</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>},
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>                      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ON</span><span style="color:#710">'</span></span>:{<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>:<span style="color:#00D">2</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>},
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>                      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">MANAGE_TEMP</span><span style="color:#710">'</span></span>:{<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>:<span style="color:#00D">3</span>,
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>                                     <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>:<span style="color:#369;font-weight:bold">str</span>(ui_state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">desired_temp</span><span style="color:#710">'</span></span>])}}
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    cleaned_state = {}
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#080;font-weight:bold">if</span> ui_state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">desired_power_state</span><span style="color:#710">'</span></span>] == <span style="color:#069">False</span>:
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        cleaned_state=allowed_states[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">OFF</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    <span style="color:#080;font-weight:bold">elif</span> ui_state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">desired_mode_is_home</span><span style="color:#710">'</span></span>]:
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        cleaned_state=allowed_states[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">MANAGE_TEMP</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span style="color:#080;font-weight:bold">else</span>:
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        cleaned_state=allowed_states[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ON</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    <span style="color:#080;font-weight:bold">return</span> cleaned_state
+</pre></div>
+</div>
+</div>
+
+<h3 id="login-and-logout-routes">Login and logout routes</h3>
+
+<p>I’ve added login and logout routes to my final server program. I’m not going to explain how to do that here, but you can look at my code, or go to this <a href="https://realpython.com/blog/python/introduction-to-flask-part-2-creating-a-login-page/">realpython tutorial</a>. I recommend watching the video. Make sure to add the @login_required decorator to the appropriate functions.</p>
+
+<h3 id="htmluser-interface">HTML/User interface</h3>
+
+<p>You’ll need some pages for these routes to return. To start out, I recommend just using some plain HTML, and later, you can add onto it with some javascript and CSS to make the UI better. I’m using some jQuery and CSS Bootstrap. My HTML templates are <a href="https://github.com/mlauter/RemoteAC/tree/master/app/templates">here</a>, js is <a href="https://github.com/mlauter/RemoteAC/blob/master/app/static/on_off.js">here</a>.</p>
+
+<p>UI design was decidedly <em>not</em> the focus of this project, and I’d love suggestions for making it better:</p>
+
+<p><img src="../images/ac_website.png" alt="UI" /> </p>
+
+<h1 id="part-iii-the-raspberry-pi-program">Part III: The Raspberry Pi program</h1>
+
+<p>Now that we have our server, we can flesh out the code that’s going to run on the pi. </p>
+
+<p>So far, we have some functions that allow us to read from the temperature sensor (I’ve added one that just returns the temperature in fahrenheit), and we’ve imported the <code>RPi-GPIO</code> library and set up our switch pin. I’ve also added a function to read off the value of the switch pin, so we know whether power is flowing to our AC or not.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">RPi.GPIO</span> <span style="color:#080;font-weight:bold">as</span> io
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">time</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">os</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">glob</span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="color:#777">#setup for GPIO</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>io.setmode(io.BCM)
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>switch_pin = <span style="color:#00D">17</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>io.setup(switch_pin, io.OUT)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>io.output(switch_pin, <span style="color:#069">False</span>)
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#777">#setup for the temperature sensor</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>os.system(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">modprobe w1-gpio</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>os.system(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">modprobe w1-therm</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span> 
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>base_dir = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/sys/bus/w1/devices/</span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>device_folder = glob.glob(base_dir + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">28*</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>device_file = device_folder[<span style="color:#00D">0</span>] + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/w1_slave</span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="color:#777">#functions to read from temp sensor</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">read_temp_raw</span>():
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    f = <span style="color:#369;font-weight:bold">open</span>(device_file, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">r</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    lines = f.readlines()
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    f.close()
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span style="color:#080;font-weight:bold">return</span> lines
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span> 
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">read_temp</span>():
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>    lines = read_temp_raw()
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    <span style="color:#080;font-weight:bold">while</span> lines[<span style="color:#00D">0</span>].strip()[-<span style="color:#00D">3</span>:] != <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">YES</span><span style="color:#710">'</span></span>:
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>        time.sleep(<span style="color:#60E">0.2</span>)
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>        lines = read_temp_raw()
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    equals_pos = lines[<span style="color:#00D">1</span>].find(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">t=</span><span style="color:#710">'</span></span>)
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>    <span style="color:#080;font-weight:bold">if</span> equals_pos != -<span style="color:#00D">1</span>:
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        temp_string = lines[<span style="color:#00D">1</span>][equals_pos+<span style="color:#00D">2</span>:]
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>        temp_c = <span style="color:#369;font-weight:bold">float</span>(temp_string) / <span style="color:#60E">1000.0</span>
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>        temp_f = temp_c * <span style="color:#60E">9.0</span> / <span style="color:#60E">5.0</span> + <span style="color:#60E">32.0</span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>        <span style="color:#080;font-weight:bold">return</span> temp_c, temp_f
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">current_temperature</span>():
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>    temperature = read_temp()[<span style="color:#00D">1</span>]
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>    <span style="color:#080;font-weight:bold">return</span> <span style="color:#369;font-weight:bold">int</span>(temperature)
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span><span style="color:#777">#Check the whether switch_pin is HIGH or LOW</span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">is_running</span>():
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>    <span style="color:#080;font-weight:bold">return</span> io.input(switch_pin)
+</pre></div>
+</div>
+</div>
+
+<p>Now, we’ll just add two more main functions to this program. One to make POST requests to the server, and one to set the state of the air conditioner.</p>
+
+<h2 id="post-requests-to-the-server">POST requests to the server</h2>
+
+<p>This is the ‘hey, server!’ function. In the main loop of our program, we’ll call it every second. The Raspberry pi will POST its current state to the server, and the server will respond with the desired state from the user. We can then pass this information off to a different function that will decide what to do with the information.</p>
+
+<p>First, install and import the python <a href="http://docs.python-requests.org/en/latest/">Requests</a> library.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">requests</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">send_current_state</span>():
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    r = requests.post(url, 
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>                      data=some data, 
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>                      headers=some header, 
+<span class="line-numbers"><a href="#n7" name="n7">7</a></span>                      timeout=<span style="color:#00D">5</span>)
+</pre></div>
+</div>
+</div>
+
+<p>Now we’ll define the parameters for the post request to use. The url should be either the IP address of your computer, if you are testing on localhost, or the address of your site, wherever you are hosting it, followed by the name of the route to hit (ac_status).</p>
+
+<p>The headers I’ve set allow requests to send data as json. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">requests</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">send_current_state</span>():
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    url = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">your.url.here/ac_status</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    headers = {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Content-type</span><span style="color:#710">'</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application/json</span><span style="color:#710">'</span></span>, 
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>               <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Accept</span><span style="color:#710">'</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/plain</span><span style="color:#710">'</span></span>}
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    r = requests.post(url, 
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>                      data=some data, 
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>                      headers=some header, 
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>                      timeout=<span style="color:#00D">5</span>)
+</pre></div>
+</div>
+</div>
+
+<p>We also need to decide what data to send to the server. Looking back at the code for our server, we need to send the current temperature in the room and  whether the air conditioner is on or off (We can get these values from the functions we just wrote). We also need to send the state number and goal temperature that together represent the air conditioner’s current state. <em>Note: I have a separate value for on or off so I can always know whether the air conditioner is on or off, even when the AC is acting as a thermostat.</em></p>
+
+<p>In order to keep track of the state of the air conditioner, I’m going to initialize a variable in the main loop of the program called <code>state</code>.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">requests</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">send_current_state</span>():
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    data_to_be_sent = {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">is_running</span><span style="color:#710">&quot;</span></span>: is_running(),
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">room_temp</span><span style="color:#710">&quot;</span></span>: current_temperature(),
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">state_num</span><span style="color:#710">&quot;</span></span>: state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>],
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">goal_temp</span><span style="color:#710">&quot;</span></span>: state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    url = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">your.url.here/ac_status</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    headers = {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Content-type</span><span style="color:#710">'</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application/json</span><span style="color:#710">'</span></span>, 
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>               <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Accept</span><span style="color:#710">'</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/plain</span><span style="color:#710">'</span></span>}
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    r = requests.post(url, 
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                      data=some data, 
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                      headers=some header, 
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>                      timeout=<span style="color:#00D">5</span>)
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span style="color:#080;font-weight:bold">if</span> __name__ == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">__main__</span><span style="color:#710">&quot;</span></span>:
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    state={<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>:<span style="color:#00D">1</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>}
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span style="color:#080;font-weight:bold">while</span> <span style="color:#00D">1</span>:
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        time.sleep(<span style="color:#00D">1</span>)
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        send_current_state()
+</pre></div>
+</div>
+</div>
+
+<p>The last thing this function needs to do is get the server’s response and send off the user’s desired state to another function. We’ve called the request object <code>r</code>, and when the POST request is made successfully, <code>r.json()</code> will give you the server’s response as json.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">requests</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">send_current_state</span>():
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    data_to_be_sent = {
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">is_running</span><span style="color:#710">&quot;</span></span>: is_running(),
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">room_temp</span><span style="color:#710">&quot;</span></span>: current_temperature(),
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">state_num</span><span style="color:#710">&quot;</span></span>: state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>],
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">goal_temp</span><span style="color:#710">&quot;</span></span>: state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    url = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">your.url.here/ac_status</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    headers = {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Content-type</span><span style="color:#710">'</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application/json</span><span style="color:#710">'</span></span>, 
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>               <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Accept</span><span style="color:#710">'</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/plain</span><span style="color:#710">'</span></span>}
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    r = requests.post(url, 
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                      data=some data, 
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                      headers=some header, 
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>                      timeout=<span style="color:#00D">5</span>)
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>    state_num = r.json()[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>    goal_temp = r.json()[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>]
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    <span style="color:#777">#The function we have to write next</span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    set_state(state_num,goal_temp)                      
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="setting-the-air-conditioners-state">Setting the air conditioner’s state</h2>
+
+<p>We’ll define a function, <code>set_state</code> that will take two arguments, a state number (1, 2, or 3) and a goal temperature, which, as we defined in our server code will be the empty string if the state number is 1 or 2. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">set_state</span>(state_num, goal_temp):
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#777"># get the room temperature again</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    room_temp = current_temperature()
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#777">#handle states</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#080;font-weight:bold">if</span> state_num == <span style="color:#00D">1</span>:
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#080;font-weight:bold">pass</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#080;font-weight:bold">elif</span> state_num == <span style="color:#00D">2</span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span style="color:#080;font-weight:bold">pass</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#080;font-weight:bold">else</span>:
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#080;font-weight:bold">pass</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#777">#set the new state</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>] = state_num
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>    state[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>] = goal_temp
+</pre></div>
+</div>
+</div>
+
+<p><strong>State 1</strong> means the air conditioner should be off no matter what, and <strong>State 2</strong> means the AC should be on no matter what, so these conditions are quite simple. We’ll either set the switch pin HIGH or LOW.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>    <span style="color:#777">#handle states</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#080;font-weight:bold">if</span> state_num == <span style="color:#00D">1</span>:
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        io.output(switch_pin, <span style="color:#069">False</span>)
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        goal_temp = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    <span style="color:#080;font-weight:bold">elif</span> state_num == <span style="color:#00D">2</span>:
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        io.output(switch_pin, <span style="color:#069">True</span>)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        goal_temp = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#080;font-weight:bold">else</span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        <span style="color:#080;font-weight:bold">pass</span>
+</pre></div>
+</div>
+</div>
+
+<p><strong>State 3</strong> is slightly more complicated. The air conditioner should compare the temperature requested by the user to the room temperature, turn or stay on if the room is too hot, and turn or stay off if the room is at the right temperature or too cold. </p>
+
+<p>In an effort to save energy and keep the air conditioner from turning on and off in rapid succession right on the edge of the goal temperature, I set a temperature range. The lower-bound is the goal temperature and the upper-bound is two degrees warmer. (Using it in my own room, I found this to be a reasonable and comfortable range). Of course, the air conditioner still vacillates rapidly around the borders of this range, an issue I have yet to fix. A better way to handle this might be to disallow changes for a certain amount of time after the air conditioner has turned on or off. I would love suggestions! I’ve made it an open issue on the github repo. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>    <span style="color:#080;font-weight:bold">else</span>:
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>        <span style="color:#777"># don't get warmer than 2 degrees above goal</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        goal_temp_range_max = <span style="color:#369;font-weight:bold">int</span>(goal_temp) + <span style="color:#00D">2</span> 
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        <span style="color:#080;font-weight:bold">if</span> room_temp &gt; goal_temp_range_max:
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>            <span style="color:#777"># if we're hotter than the max, turn on</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>            io.output(switch_pin, <span style="color:#069">True</span>)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>        <span style="color:#080;font-weight:bold">elif</span> room_temp &lt;= goal_temp:
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>            <span style="color:#777"># if we're at or under the temp range, turn off</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>            io.output(switch_pin, <span style="color:#069">False</span>)
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>        <span style="color:#777">#otherwise do nothing</span>
+</pre></div>
+</div>
+</div>
+
+<h2 id="cleanup-and-error-handling">Cleanup and error handling</h2>
+
+<p>My final program has a little bit more code in it to handle problems. The goal of this code is to a) keep the program alive even if the server doesn’t respond, and b) make sure to turn the air conditioner off if something goes seriously wrong or the program is going to exit. </p>
+
+<p>My strategy for waiting out periods of server unresponsiveness is: </p>
+
+<ol>
+  <li>Keep track of the time of the last successful communication</li>
+  <li>If the server doesn’t respond and it’s been less than five minutes since the last successful request, just keep trying.</li>
+  <li>If it’s been more than five minutes, turn the AC off and keep trying.</li>
+</ol>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">signal_handler</span>(signal, frame):
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    cleanup()
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">cleanup</span>():
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    io.cleanup()
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    sys.exit(<span style="color:#00D">0</span>)
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#080;font-weight:bold">if</span> __name__ == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">__main__</span><span style="color:#710">&quot;</span></span>:
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    state={<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">state_num</span><span style="color:#710">'</span></span>:<span style="color:#00D">1</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">goal_temp</span><span style="color:#710">'</span></span>:<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>}
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    last_connect = <span style="color:#069">None</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>    <span style="color:#080;font-weight:bold">try</span>:
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        <span style="color:#080;font-weight:bold">while</span> <span style="color:#069">True</span>:
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>            time.sleep(<span style="color:#00D">1</span>)
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>            <span style="color:#080;font-weight:bold">try</span>:
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>                pre_connect = datetime.now()
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>                send_current_state()
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>                last_connect = datetime.now()
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>            <span style="color:#080;font-weight:bold">except</span> <span style="color:#C00;font-weight:bold">IOError</span> <span style="color:#080;font-weight:bold">as</span> e:
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>                <span style="color:#080;font-weight:bold">print</span> e
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>                t_delt = timedelta(minutes=<span style="color:#00D">5</span>)
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>                <span style="color:#080;font-weight:bold">if</span> last_connect:
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>                    <span style="color:#080;font-weight:bold">if</span> datetime.now()&gt;(last_connect+t_delt):
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>                        io.output(switch_pin,<span style="color:#069">False</span>)
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>                <span style="color:#080;font-weight:bold">else</span>:
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>                    <span style="color:#080;font-weight:bold">if</span> datetime.now()&gt;(pre_connect+t_delt):
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>                        io.output(switch_pin,<span style="color:#069">False</span>) 
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    <span style="color:#080;font-weight:bold">except</span> <span style="color:#C00;font-weight:bold">Exception</span> <span style="color:#080;font-weight:bold">as</span> e:
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>        <span style="color:#080;font-weight:bold">print</span> e
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>    <span style="color:#080;font-weight:bold">finally</span>:
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>        cleanup()
+</pre></div>
+</div>
+</div>
+
+<h1 id="final-notes">Final notes</h1>
+
+<h2 id="host-your-server-somewhere-or-deploy-it-to-heroku">Host your server somewhere or deploy it to Heroku</h2>
+
+<p>I followed <a href="https://devcenter.heroku.com/articles/python-gunicorn">these instructions</a> to deploy my server to Heroku. You will need a Procfile. Mine is in the repo in the app directory, and it’s just one line:</p>
+
+<p><code>web: gunicorn app:app --log-file=-</code></p>
+
+<h2 id="keep-your-pi-program-running-without-an-ssh-session">Keep your Pi program running without an ssh session</h2>
+
+<p>Once your server is deployed, make sure you put in the correct URL into the program that will run on the Raspberry Pi. </p>
+
+<p>In order to keep a process running on the Pi even after you’ve closed your ssh session, just put <code>nohup</code> in front of the command you would normally run. Also, keep in mind that the GPIO library requires root privileges! </p>
+
+<p><code>nohup sudo python ac_ping.py</code></p>
+
+<p><br /></p>
+
+<h1 id="now-you-have-your-own-smart-ac">Now you have your own Smart AC!</h1>
+
+<p>Go make cool stuff!</p>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+	<img src="https://mlauter.github.io/images/miriam_bio-photo.jpg" class="bio-photo" alt="Miriam Lauter bio photo"></a>
+
+<h3>Miriam Lauter</h3>
+<p>I'm a person learning stuff.</p>
+<a href="http://github.com/mlauter" class="author-social" target="_blank"><i class="fa fa-github"></i> Github</a>
+<a href="http://twitter.com/miriamlauter" class="author-social" target="_blank"><i class="fa fa-twitter-square"></i> Twitter</a>
+
+
+<a href="http://linkedin.com/in/miriamlauter" class="author-social" target="_blank"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>How to Make Your Own Smart AC</strong> was published on <time datetime="2014-09-10T19:56:51-04:00">September 10, 2014</time> by <a href="https://mlauter.github.io/about" title="About Miriam Lauter">Miriam Lauter</a>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://mlauter.github.io/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://mlauter.github.io/getting-started-with-raspberry-pi/" title="Getting Started With Raspberry Pi">Getting Started With Raspberry Pi</a></li>
+    
+      <li><a href="https://mlauter.github.io/writing-snake-in-python/" title="Writing Snake in python">Writing Snake in python</a></li>
+    
+      <li><a href="https://mlauter.github.io/baby-steps-to-becoming-an-open-source-contributor/" title="Baby Steps to Becoming an Open Source Contributor">Baby Steps to Becoming an Open Source Contributor</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    <span>&copy; 2014 Miriam Lauter. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://mlauter.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://mlauter.github.io/assets/js/scripts.min.js"></script>
+
+	        
+
+</body>
+</html>
