@@ -1,6 +1,5 @@
-mlauter.github.io
+rcblog
 =================
 
-This is my blog.
-If you want to read about the jekyll theme I used or download it,
-go here: https://github.com/mmistakes/minimal-mistakes
+Blog from my time at the [Recurse Center](https://www.recurse.com/) (fka Hacker School)
+Summer-Fall 2014
